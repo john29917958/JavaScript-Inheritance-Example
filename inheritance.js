@@ -12,12 +12,17 @@ $(document).ready(function () {
     }
 
     function Parent() {
+        
+    };
 
+    Parent.prototype.name = "Parent";
+
+    Parent.prototype.hiccups = function () {
+        return this.name + ": urrrrgh~";
     };
 
     Parent.prototype.say = function () {
-        console.log("Parent: I'm Parent!");
-        return "Parent: I'm Parent!";
+        return this.name + ": I'm " + this.name + "!";
     };
 
     function Child() {
@@ -26,18 +31,14 @@ $(document).ready(function () {
 
     extend(Parent, Child);
 
-    Child.prototype.say = function () {
-        console.log("Child: I'm Child!");
-        return "Child: I'm Child!";
-    };
+    Child.prototype.name = "Child";
 
-    Child.prototype.jump = function () {
-        console.log("Child: jump!");
-        return "Child: jump!";
+    Child.prototype.hiccups = function () {
+        return this.name + ": rumble!";
     };
 
     var child = new Child(),
         parent = new Parent();
 
-    $("#result").append(parent.say() + "<br>").append(child.say() + "<br>").append(child.jump());
+    $("#result").append(parent.say() + "<br>").append(child.say() + "<br>").append(parent.hiccups() + "<br>").append(child.hiccups());
 });

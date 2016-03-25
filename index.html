@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="uft-8">
   <head>
     <title>Inheritance Example</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script type="text/javascript" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -15,50 +16,54 @@
       <hr>
       <h2>Result</h2>
       <div class="well" id="result"></div>
+      <br>
+      <h2>Code</h2>
       <pre>
-$(document).ready(function () {
-    function extend(parent, child) {
-        if (typeof parent === 'function' && typeof child === 'function') {
-            child.prototype = Object.create(Parent.prototype);
-            child.prototype.constructor = child;
-            
-            return child;
-        }
-        else {
-            return null;
-        }
+function extend(parent, child) {
+    if (typeof parent === 'function' && typeof child === 'function') {
+        child.prototype = Object.create(Parent.prototype);
+        child.prototype.constructor = child;
+        
+        return child;
     }
-
-    function Parent() {
-
-    };
-
-    Parent.prototype.say = function () {
-        console.log("Parent: I'm Parent!");
-        return "Parent: I'm Parent!";
-    };
-
-    function Child() {
-
+    else {
+        return null;
     }
+}
 
-    extend(Parent, Child);
+function Parent() {
+    
+};
 
-    Child.prototype.say = function () {
-        console.log("Child: I'm Child!");
-        return "Child: I'm Child!";
-    };
+Parent.prototype.name = "Parent";
 
-    Child.prototype.jump = function () {
-        console.log("Child: jump!");
-        return "Child: jump!";
-    };
+Parent.prototype.hiccups = function () {
+    return this.name + ": urrrrgh~";
+};
 
-    var child = new Child(),
-        parent = new Parent();
+Parent.prototype.say = function () {
+    return this.name + ": I'm " + this.name + "!";
+};
 
-    $("#result").append(parent.say() + "&lt;br&gt;").append(child.say() + "&lt;br&gt;").append(child.jump());
-});
+function Child() {
+
+}
+
+extend(Parent, Child);
+
+Child.prototype.name = "Child";
+
+Child.prototype.hiccups = function () {
+    return this.name + ": rumble!";
+};
+
+var child = new Child(),
+    parent = new Parent();
+
+parent.say();
+child.say();
+parent.hiccups();
+child.hiccups();
       </pre>
     </div>
   </body>
