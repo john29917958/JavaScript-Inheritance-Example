@@ -1,14 +1,21 @@
+'use strict';
+
 $(document).ready(function () {
-    function extend(parent, child) {
-        if (typeof parent === 'function' && typeof child === 'function') {
+    /**
+     * @param {Object} child The child object.
+     * @param {Object} parent The parent object.
+     * @returns {Object} Returns the child object extended
+     * from the parent object.
+     */
+    function extend(child, parent) {
+        if (parent instanceof Object && child instanceof Object) {
             child.prototype = Object.create(Parent.prototype);
             child.prototype.constructor = child;
             
             return child;
         }
-        else {
-            return null;
-        }
+
+        throw "parameters of extend() must be Object.";
     }
 
     function Parent() {
@@ -29,7 +36,7 @@ $(document).ready(function () {
 
     }
 
-    extend(Parent, Child);
+    extend(Child, Parent);
 
     Child.prototype.name = "Child";
 
